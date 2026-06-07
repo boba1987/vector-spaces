@@ -20,9 +20,20 @@ Ovaj repo sadrzi Jupyter/Colab notebook-e koji pokazuju prakticnu primenu matema
 
 ## Notebook-i
 
+- **`simple_recommender_ai_colab.ipynb`** (pocetnicki) - jednostavan sistem za preporuku filmova, objasnjen korak-po-korak za nekoga ko prvi put vidi AI; intuicija i analogije pre formula.
 - **`vector_metric_spaces_ai_colab.ipynb`** (math-heavy) - objedinjuje obe teorije kroz retrieval + kNN.
 - **`neural_network_math_colab.ipynb`** (math-heavy) - mala neuralna mreza od nule u NumPy; obe teorije primenjene samo onoliko koliko je potrebno da se objasni kako mreza radi.
 - `vector_spaces_ai_colab.ipynb` (raniji, samo Strang Ch2) - ostaje kao referenca.
+
+### Sta `simple_recommender_ai_colab.ipynb` demonstrira
+
+Pocetnicki uvod u AI preporuke ("posto ti se svideo ovaj film, probaj ove"). Svaki korak ima isti sablon: **sta radimo -> zasto (analogija) -> mala formula -> veza sa knjigom**. Koristi samo numpy/pandas/matplotlib i rucno napravljenu tabelu od ~10 filmova.
+- film kao vektor / tacka u prostoru osobina (Strang 2.1, 2.3) + 2D scatter
+- Euklidsko rastojanje kao mera slicnosti (Ch7 Def 7.1, Ex 7.4)
+- cosine slicnost i zasto je u [-1, 1] preko Cauchy-Schwarz (Ch7 Thm 7.54)
+- norma i normalizacija za posteno poredjenje "ukusa" (Ch7 Def 7.11)
+- funkcija `preporuci(film, n)` + prag slicnosti kao lopta oko filma (Ch7 Def 7.18)
+- vizualizacija mape filmova sa linijama ka preporukama + rekapitulacija korak -> matematika -> zasto
 
 ### Sta `vector_metric_spaces_ai_colab.ipynb` demonstrira
 
@@ -60,7 +71,7 @@ Mala MLP (`2 -> 8 -> 1`) na 2D two-moons datasetu, implementirana od nule (rucni
 ## Pokretanje u Google Colab-u
 
 1. Otvori [Google Colab](https://colab.research.google.com/).
-2. Uploaduj zeljeni notebook iz ovog repoa (`vector_metric_spaces_ai_colab.ipynb` ili `neural_network_math_colab.ipynb`), ili koristi Open In Colab badge u notebook-u.
+2. Uploaduj zeljeni notebook iz ovog repoa (`simple_recommender_ai_colab.ipynb`, `vector_metric_spaces_ai_colab.ipynb` ili `neural_network_math_colab.ipynb`), ili koristi Open In Colab badge u notebook-u.
 3. Pokreni celije redom (`Runtime -> Run all`).
 4. Po potrebi promeni:
    - `USE_SENTENCE_TRANSFORMERS = False/True`
