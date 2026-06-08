@@ -33,6 +33,7 @@ Pocetnicki uvod u AI preporuke ("posto ti se svideo ovaj film, probaj ove"). Sva
 - cosine slicnost i zasto je u [-1, 1] preko Cauchy-Schwarz (Ch7 Thm 7.54)
 - norma i normalizacija za posteno poredjenje "ukusa" (Ch7 Def 7.11)
 - funkcija `preporuci(film, n)` + prag slicnosti kao lopta oko filma (Ch7 Def 7.18)
+- "recept" mesavine filmova za zeljeni ukus resavanjem `Ax=b` (Strang 2.2)
 - vizualizacija mape filmova sa linijama ka preporukama + rekapitulacija korak -> matematika -> zasto
 
 ### Sta `vector_metric_spaces_ai_colab.ipynb` demonstrira
