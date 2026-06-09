@@ -1,83 +1,54 @@
-# Vector & Metric Spaces u AI (Colab Projekat)
+# Math Foundations of AI: Recommend Me a Movie
 
-Ovaj repo sadrzi Jupyter/Colab notebook-e koji pokazuju prakticnu primenu matematike iz dve knjige u jednom AI pipeline-u (semantic retrieval + kNN klasifikacija). Vodeci princip: **definicija/teorema iz knjige -> numericki dokaz da vazi -> upotreba u prakticnom AI zadatku.**
+This repo contains a single beginner-friendly Jupyter/Colab notebook that builds a movie
+recommendation system from scratch to show the math behind AI in practice. The guiding
+idea: **an AI recommendation = turn things into vectors, then measure which ones are
+closest / most similar.**
 
-## Izvori
+Each step follows the same template: **what we do -> why (a real-life analogy) ->
+the formula -> the link to the theory.**
 
-- Gilbert Strang, *Linear Algebra and Its Applications*, **Chapter 2: Vector Spaces**
-  - 2.1 Vector Spaces and Subspaces
-  - 2.2 Solving Ax=0 and Ax=b
-  - 2.3 Linear Independence, Basis, and Dimension
-  - 2.4 The Four Fundamental Subspaces
-  - PDF: `Gilbert_Strang_Linear_Algebra_and_Its_Applications.pdf` (poglavlje 2 ~ str. 87-130)
-- *Introduction to Analysis*, **Chapter 7: Metric Spaces**
-  - definicija 7.1 (aksiomi metrike), vežbe 7.2-7.8 (L1/L2/Linf/discrete metrike)
-  - definicija 7.11 / propozicija 7.12 (norma -> metrika), vežba 7.15 (Lp-norma, inner product)
-  - slika 1 / vežba 7.20 (jedinicne lopte), str. 98 (ekvivalencija normi)
-  - definicija 7.18 (otvorene lopte), definicije 7.31/7.38/7.39 (nizovi, Cauchy, kompletnost)
-  - teorema 7.54 (Cauchy-Schwarz), posledica 7.55 (Minkowski)
-  - PDF: `intro_analysis_ch7.pdf`
+## Sources
 
-## Notebook-i
+- **Vectors** - Gilbert Strang, *Linear Algebra and Its Applications*, Chapter 2 (Vector Spaces):
+  describing things with numbers and treating them as points in a space.
+  [PDF](https://rksmvv.ac.in/wp-content/uploads/2021/04/Gilbert_Strang_Linear_Algebra_and_Its_Applicatio_230928_225121.pdf)
+- **Similarity / distance** - *Introduction to Analysis*, Chapter 7 (Metric Spaces):
+  how to measure how close two points are.
+  [PDF](https://www.math.ucdavis.edu/~hunter/m125a/intro_analysis_ch7.pdf)
 
-- **`simple_recommender_ai_colab.ipynb`** (pocetnicki) - jednostavan sistem za preporuku filmova, objasnjen korak-po-korak za nekoga ko prvi put vidi AI; intuicija i analogije pre formula.
-- **`vector_metric_spaces_ai_colab.ipynb`** (math-heavy) - objedinjuje obe teorije kroz retrieval + kNN.
-- **`neural_network_math_colab.ipynb`** (math-heavy) - mala neuralna mreza od nule u NumPy; obe teorije primenjene samo onoliko koliko je potrebno da se objasni kako mreza radi.
-- `vector_spaces_ai_colab.ipynb` (raniji, samo Strang poglavlje 2) - ostaje kao referenca.
+## The Notebook
 
-### Sta `simple_recommender_ai_colab.ipynb` demonstrira
+**`ai_movie_recommender.ipynb`** — a step-by-step movie recommender for someone seeing AI
+for the first time. It uses only `numpy`, `pandas`, and `matplotlib`, plus a small hand-made
+table of ~10 movies described by 5 features (action, romance, comedy, pace, seriousness).
 
-Pocetnicki uvod u AI preporuke ("posto ti se svideo ovaj film, probaj ove"). Svaki korak ima isti sablon: **sta radimo -> zasto (analogija) -> mala formula -> veza sa knjigom**. Koristi samo numpy/pandas/matplotlib i rucno napravljenu tabelu od ~10 filmova.
-- film kao vektor / tacka u prostoru osobina (Strang 2.1, 2.3) + 2D scatter
-- Euklidsko rastojanje kao mera slicnosti (poglavlje 7, definicija 7.1, vežba 7.4)
-- cosine slicnost i zasto je u [-1, 1] preko Cauchy-Schwarz (poglavlje 7, teorema 7.54)
-- norma i normalizacija za posteno poredjenje "ukusa" (poglavlje 7, definicija 7.11)
-- funkcija `preporuci(film, n)` + prag slicnosti kao lopta oko filma (poglavlje 7, definicija 7.18)
-- "recept" mesavine filmova za zeljeni ukus resavanjem `Ax=b` (Strang 2.2)
-- vizualizacija mape filmova sa linijama ka preporukama + rekapitulacija korak -> matematika -> zasto
+What it demonstrates, step by step:
 
-### Sta `vector_metric_spaces_ai_colab.ipynb` demonstrira
+- **A movie is a vector** — a row of numbers is a point in a feature space; similar movies
+  are nearby points (Strang 2.1, 2.3).
+- **Euclidean distance** — how "far apart" two movies are; smaller distance = more similar
+  (Analysis ch. 7, definition 7.1, exercise 7.4/7.5).
+- **Cosine similarity** — comparing the *angle* (taste) instead of the magnitude (rating
+  strength), bounded to [-1, 1] via Cauchy-Schwarz (inner product and norm, exercise 7.15;
+  Cauchy-Schwarz, theorem 7.54).
+- **Normalization** — fair comparison of "taste" regardless of how high/low someone rates
+  (Analysis ch. 7, norms).
+- **Making a recommendation** — combining the pieces into a `recommend(movie, n)` function,
+  using a similarity threshold as an open ball around a movie (definition 7.18).
+- **A taste "recipe"** — solving `Ax = b` to find how much of each movie to mix to reach a
+  desired taste profile `b` (Strang 2.2).
+- **Movie map** — a 2D visualization of the movies with lines drawn to their recommendations,
+  plus a recap of where the math showed up.
 
-Vector Spaces (poglavlje 2):
-- numericku proveru aksioma vektorskog prostora (2.1)
-- rank i eksplicitnu bazu prostora kolona preko RREF (2.3)
-- resavanje `Ax=0` (baza nullspace-a) i `Ax=b` (least squares) (2.2)
-- cetiri fundamentalna podprostora, rank-nullity i ortogonalnost (2.4)
-- SVD bazu `V_k`, projekcionu matricu `P=V_k V_k^T` (`P^2=P`, `P=P^T`), residual (2.1/2.3/2.4)
+## Running in Google Colab
 
-Metric Spaces (poglavlje 7):
-- verifikaciju aksioma metrike za L1/L2/Linf/Lp/discrete (definicija 7.1)
-- norme, indukovanu metriku, translacionu invarijantnost i homogenost (definicija 7.11, propozicija 7.12)
-- Cauchy-Schwarz i izvodjenje cosine slicnosti (teorema 7.54, vežba 7.15)
-- Minkowski / nejednakost trougla (posledica 7.55)
-- ekvivalenciju normi (str. 98) i jedinicne lopte (slika 1)
-- otvorene lopte za radius retrieval (definicija 7.18)
-- gradient descent kao Cauchy niz + kompletnost (definicije 7.31/7.38/7.39)
+1. Open [Google Colab](https://colab.research.google.com/).
+2. Open `ai_movie_recommender.ipynb` from this repo (upload it, or use the "Open in Colab"
+   badge at the top of the notebook).
+3. Run the cells in order (`Runtime -> Run all`).
 
-AI primena:
-- semantic retrieval sa poredjenjem metrika (cosine/L2/L1/Linf/Mahalanobis), full vs subspace, Recall@k i radius retrieval
-- kNN klasifikaciju po metrikama + decision boundary vizualizaciju u 2D
+## Dependencies
 
-### Sta `neural_network_math_colab.ipynb` demonstrira
-
-Mala MLP (`2 -> 8 -> 1`) na 2D two-moons datasetu, implementirana od nule (rucni forward/backprop). Svaki korak vezan za poglavlje:
-- linearni sloj `z=Wx+b` kao afino preslikavanje izmedju vektorskih prostora (Strang 2.1, 2.2)
-- `rank(W)` kao kapacitet sloja (2.3); `C(W)` i `N(W)` = sta sloj propusta/ignorise, sa proverom `W@n~0` (2.4)
-- aktivacije kao neprekidne, Lipschitz funkcije (poglavlje 7, definicija 7.44, posledica 7.55)
-- loss kao kvadrat L2 norme + L2 regularizacija (poglavlje 7, definicija 7.11)
-- backprop + gradient-check; inner product i Cauchy-Schwarz za smer najbrzeg pada (poglavlje 7, vežba 7.15, teorema 7.54)
-- trening kao Cauchy niz koji konvergira zbog kompletnosti `R^P` (poglavlje 7, definicije 7.31/7.38/7.39)
-- evaluacija + vizualizacija zakrivljene granice odluke
-
-## Pokretanje u Google Colab-u
-
-1. Otvori [Google Colab](https://colab.research.google.com/).
-2. Uploaduj zeljeni notebook iz ovog repoa (`simple_recommender_ai_colab.ipynb`, `vector_metric_spaces_ai_colab.ipynb` ili `neural_network_math_colab.ipynb`), ili koristi Open In Colab badge u notebook-u.
-3. Pokreni celije redom (`Runtime -> Run all`).
-4. Po potrebi promeni:
-   - `USE_SENTENCE_TRANSFORMERS = False/True`
-   - dimenziju podprostora `k`
-
-## Napomena o zavisnostima
-
-Notebook po default-u koristi lagani TF-IDF backend (stabilan za Colab). Zavisnosti: `numpy`, `pandas`, `matplotlib`, `scikit-learn`, `scipy`, `sympy` (instaliraju se u prvoj celiji). Opcioni `sentence-transformers` backend moze se ukljuciti jednim flag-om za semanticki bogatije embeddinge.
+The first cell installs everything needed: `numpy`, `pandas`, and `matplotlib`. No other
+setup is required.
